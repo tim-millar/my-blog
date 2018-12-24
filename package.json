@@ -24,5 +24,8 @@
   },
   "bugs": {
     "url": "https://github.com/gatsbyjs/gatsby/issues"
+  },
+  "devDependencies": {
+    "prettier": "^1.15.3"
   }
 }
