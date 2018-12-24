@@ -1,50 +1,40 @@
 import React from "react"
-import { StaticQuery, graphql } from 'gatsby';
+import { graphql } from 'gatsby';
+import Header from '../components/Header';
 
-const TitleAndDescription = ({ data }) => {
-    const title = data.site.siteMetadata.title
-    const description = data.site.siteMetadata.description
-
-    return (
-        <div style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            fontFamily: 'avenir'
-
-        }}>
-            <h2 style={{marginBottom: 0}}>{title}</h2>
-            <p style={{marginTop: 0, opacity: 0.5}}>{description}</p>
-        </div>
-    )
+const Layout = ({ data }) => {
+  const edges = data.allMarkdownRemark.edges;
+  return (
+    <div>
+      <Header />
+      {edges.map(edge => {
+        const { frontmatter } = edge.node
+        return (
+          <div key={frontmatter.path}>
+            {frontmatter.title}
+          </div>
+        )
+      })}
+    </div>
+  )
 }
 
-const Header = () => {
-    return (
-        <StaticQuery
-            query={graphql`
-                query {
-                    site {
-                        siteMetadata {
-                            title
-                            description
-                        }
-                    }
-                }
-
-            `}
-            render={data => <TitleAndDescription data={data} />}
-        />
-    )
-
-}
-
-const Layout = () => {
-    return (
-        <div>
-            <Header />
-        </div>
-    )
-}
+export const query = graphql`
+  query HomepageQuery {
+    allMarkdownRemark(
+      sort: {order: DESC, fields: [frontmatter___date]}
+    ) {
+      edges {
+        node {
+          frontmatter {
+            title
+            path
+            date
+          }
+        }
+      }
+    }
+  }
+`;
 
 export default Layout
