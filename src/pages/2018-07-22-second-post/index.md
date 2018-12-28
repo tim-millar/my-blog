@@ -1,5 +1,5 @@
 ---
-path: "Second Post"
+path: "/second-post"
 date: "2018-07-22"
 title: "Second Post"
 tags: ['stuff', 'tings']
