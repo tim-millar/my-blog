@@ -5,7 +5,6 @@ const Template = ({ data, pageContext }) => {
   const { title } = data.markdownRemark.frontmatter;
   const { html } = data.markdownRemark;
   const { next, prev } = pageContext;
-  console.log(pageContext);
   return (
     <div style={{ fontFamily: 'avenir' }}>
       <h1>{title}</h1>
