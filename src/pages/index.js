@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react';
 import { graphql, Link } from 'gatsby';
 import Header from '../components/Header';
 
@@ -6,33 +6,35 @@ const Layout = ({ data }) => {
   const edges = data.allMarkdownRemark.edges;
   return (
     <div>
-      <div style={{
-             display: 'flex',
-             flexDirection: 'column',
-             alignItems: 'center',
-             fontFamily: 'avenir'
-           }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          fontFamily: 'avenir',
+        }}
+      >
         <Header />
         {edges.map(edge => {
-          const { frontmatter } = edge.node
+          const { frontmatter } = edge.node;
           return (
-            <div key={frontmatter.path} style={{marginBottom: '1rem'}}>
-              <Link to={frontmatter.path}>
-                {frontmatter.title}
-              </Link>
+            <div key={frontmatter.path} style={{ marginBottom: '1rem' }}>
+              <Link to={frontmatter.path}>{frontmatter.title}</Link>
             </div>
-          )
+          );
         })}
+
+        <div>
+          <Link to="/tags">Browse By Tags</Link>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const query = graphql`
   query HomepageQuery {
-    allMarkdownRemark(
-      sort: {order: DESC, fields: [frontmatter___date]}
-    ) {
+    allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }) {
       edges {
         node {
           frontmatter {
@@ -46,4 +48,4 @@ export const query = graphql`
   }
 `;
 
-export default Layout
+export default Layout;
